@@ -1,0 +1,21 @@
+import PyPDF2
+
+def extract_text_from_pdf(pdf_path):
+    # Open the PDF file
+    with open(pdf_path, 'rb') as file:
+        reader = PyPDF2.PdfReader(file)
+        
+        # Initialize a variable to hold the extracted text
+        extracted_text = ''
+        
+        # Iterate over all the pages in the PDF
+        for page_num in range(len(reader.pages)):
+            page = reader.pages[page_num]
+            extracted_text += page.extract_text() + '\n'  # Extract and concatenate text
+        
+        return extracted_text
+
+# Example usage
+pdf_path = 'sample.pdf'
+text = extract_text_from_pdf(pdf_path)
+print(text)
